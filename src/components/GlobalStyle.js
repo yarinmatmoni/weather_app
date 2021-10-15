@@ -6,6 +6,11 @@ const GlobalStyle = createGlobalStyle`
         padding: 0;
         box-sizing: border-box;
     }
+
+    h3{
+        font-family: 'Source Sans Pro', sans-serif;
+        padding: 1rem 0rem;
+    }
 `;
 
 export default GlobalStyle;
