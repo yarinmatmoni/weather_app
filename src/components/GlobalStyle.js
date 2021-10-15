@@ -9,7 +9,6 @@ const GlobalStyle = createGlobalStyle`
 
     h3{
         font-family: 'Source Sans Pro', sans-serif;
-        padding: 1rem 0rem;
     }
 `;
 
