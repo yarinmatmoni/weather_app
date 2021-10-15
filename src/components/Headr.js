@@ -29,7 +29,7 @@ const StyleHeader = styled.div`
         padding: 0.5rem;
         outline: none;
         border: none;
-        box-shadow: 0px 0px 8px rgb(0 0 0 / 40%);
+        box-shadow: 0px 0px 8px rgb(0, 0, 0 , 40%);
         color: dimgray;
         font-family: 'Source Sans Pro', sans-serif;
         font-weight: 600;
@@ -41,6 +41,14 @@ const StyleHeader = styled.div`
         background: #f6e4cb;
         color: dimgray;
         font-family: 'Source Sans Pro', sans-serif;
+        box-shadow: 0px 0px 7px rgb(0 ,0, 0 , 30%);
+        cursor: pointer;
+        transition: all 0.5s ease;
+    }
+
+    button:hover{
+      background: #d8b078;
+      color: white;
     }
 `;
 
