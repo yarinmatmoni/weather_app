@@ -1,21 +1,48 @@
-import React,{useState} from 'react';
+import React,{useEffect, useState} from 'react';
 import {currentDate , currentTime} from "../dateAndTime";
 //Style
 import styled from 'styled-components';
+//Api
+import axios from "axios";
+import {currentData} from "../api";
 
 function Headr() {
 
     const [time,setTime] = useState(currentTime);
     const [date,setDate] = useState(currentDate);
+    const [input,setInput] = useState("");
+    const [locationName,setLocationName] = useState(null);
+    const [searchResult,setSearchResult] = useState("");
 
+    const inputHandler = (e) => {
+        setInput(e.target.value);
+    };
+
+    const searchWether = () => {
+        if(input !== "")
+            setLocationName(input);
+        setInput("");
+    };
+
+    useEffect(()=>{
+        axios.get(currentData(locationName)).then((data) => {setSearchResult(data.data)});
+        if(searchResult)
+            console.log(searchResult.current.last_updated);
+    },[locationName]);
+    
     return (
         <StyleHeader>
-            <input type="text"></input>
-            <button type="submit">Search</button>
+            <input value={input} onChange={inputHandler} type="text"></input>
+            <button onClick={searchWether} type="submit">Search</button>
+            <h4>Last Update:</h4>
             <LocalTime>
-                <h3>{date}</h3>
-                <div className="line"></div>
-                <h3>{time}</h3>
+                {searchResult && (
+                    <>  
+                        <h3>{(locationName === null) ? date : searchResult.current.last_updated.split(" ")[0]}</h3>
+                        <div className="line"></div>
+                        <h3>{(locationName === null) ? time : searchResult.current.last_updated.split(" ")[1]}</h3>
+                    </>
+                )}
             </LocalTime>
         </StyleHeader>
     )
@@ -55,7 +82,7 @@ const StyleHeader = styled.div`
 const LocalTime = styled.div`
     display: flex;
     justify-content: center;
-    margin-top: 1rem;
+    margin-top: 0.5rem;
     .line{
         height: 25px;
         width: 4px;
