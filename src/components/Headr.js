@@ -1,5 +1,6 @@
 import React,{useEffect, useState} from 'react';
 import {currentDate , currentTime} from "../dateAndTime";
+import Card from './Card';
 //Style
 import styled from 'styled-components';
 //Api
@@ -8,8 +9,8 @@ import {currentData} from "../api";
 
 function Headr() {
 
-    const [time,setTime] = useState(currentTime);
-    const [date,setDate] = useState(currentDate);
+    const time = currentTime;
+    const date = currentDate;
     const [input,setInput] = useState("");
     const [locationName,setLocationName] = useState(null);
     const [searchResult,setSearchResult] = useState("");
@@ -44,6 +45,7 @@ function Headr() {
                     </>
                 )}
             </LocalTime>
+            <Card searchResult={searchResult} locationName={locationName}/>
         </StyleHeader>
     )
 };

@@ -21,6 +21,14 @@ const GlobalStyle = createGlobalStyle`
         text-align: center;
         color: dimgray;
     }
+
+    h4{
+        font-size: 0.8rem;
+        padding: 0.5rem 0rem 0rem 0rem;
+        font-family: 'Source Sans Pro', sans-serif;
+        text-align: center;
+        color: dimgray;
+    }
 `;
 
 export default GlobalStyle;
