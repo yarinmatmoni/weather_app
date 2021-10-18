@@ -5,12 +5,14 @@ import styled from 'styled-components';
 //Api
 import axios from "axios";
 import {currentData} from "../api";
+import HourCard from './HourCard';
 
 function Headr() {
 
     const [input,setInput] = useState("");
     const [locationName,setLocationName] = useState(null);
     const [searchResult,setSearchResult] = useState("");
+    const [hourForeCast,setHourForeCast] = useState([]);
 
     const inputHandler = (e) => {
         setInput(e.target.value);
@@ -26,6 +28,8 @@ function Headr() {
         axios.get(currentData(locationName)).then((data) => {setSearchResult(data.data)});
     },[locationName]);
     
+    const {forecast}  = searchResult;
+
     return (
         <StyleHeader>
             <input value={input} onChange={inputHandler} type="text"></input>
@@ -41,6 +45,10 @@ function Headr() {
                 ): ""}
             </LocalTime>
             <Card searchResult={searchResult} locationName={locationName}/>
+            {(forecast && locationName) && (
+                forecast.forecastday[0].hour.filter((h)=> h.time.split(" ")[1].split(":")[0] > searchResult.current.last_updated.split(" ")[1].split(":")[0])
+                .map((h)=> <HourCard key={h.time} time={h.time} temp={h.temp_c} feel={h.feelslike_c} chanceOfRain={h.chance_of_rain}/>)
+            )}
         </StyleHeader>
     )
 };
