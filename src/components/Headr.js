@@ -1,5 +1,4 @@
 import React,{useEffect, useState} from 'react';
-import {currentDate , currentTime} from "../dateAndTime";
 import Card from './Card';
 //Style
 import styled from 'styled-components';
@@ -9,8 +8,6 @@ import {currentData} from "../api";
 
 function Headr() {
 
-    const time = currentTime;
-    const date = currentDate;
     const [input,setInput] = useState("");
     const [locationName,setLocationName] = useState(null);
     const [searchResult,setSearchResult] = useState("");
@@ -27,8 +24,6 @@ function Headr() {
 
     useEffect(()=>{
         axios.get(currentData(locationName)).then((data) => {setSearchResult(data.data)});
-        if(searchResult)
-            console.log(searchResult.current.last_updated);
     },[locationName]);
     
     return (
@@ -37,13 +32,13 @@ function Headr() {
             <button onClick={searchWether} type="submit">Search</button>
             <h4>Last Update:</h4>
             <LocalTime>
-                {searchResult && (
+                {(searchResult && locationName) ? (
                     <>  
-                        <h3>{(locationName === null) ? date : searchResult.current.last_updated.split(" ")[0]}</h3>
+                        <h3>{searchResult.current.last_updated.split(" ")[0]}</h3>
                         <div className="line"></div>
-                        <h3>{(locationName === null) ? time : searchResult.current.last_updated.split(" ")[1]}</h3>
+                        <h3>{searchResult.current.last_updated.split(" ")[1]}</h3>
                     </>
-                )}
+                ): ""}
             </LocalTime>
             <Card searchResult={searchResult} locationName={locationName}/>
         </StyleHeader>
