@@ -47,7 +47,7 @@ function Headr() {
             <CardList>
                 {(forecast && locationName) && (
                     forecast.forecastday[0].hour.filter((h)=> h.time.split(" ")[1].split(":")[0] > searchResult.current.last_updated.split(" ")[1].split(":")[0])
-                    .map((h)=> <HourCard key={h.time} time={h.time} temp={h.temp_c} feel={h.feelslike_c} chanceOfRain={h.chance_of_rain}/>)
+                    .slice(0,5).map((h)=> <HourCard key={h.time} time={h.time} temp={h.temp_c} feel={h.feelslike_c} chanceOfRain={h.chance_of_rain}/>)
                 )}
             </CardList>
         </StyleHeader>
@@ -99,11 +99,9 @@ const LocalTime = styled.div`
 
 const CardList = styled.div`
     min-height: 25vh;
-    grid-template-columns: repeat(auto-fit,minmax(200px,1fr));
-    grid-column-gap: 4rem;
-    grid-row-gap: 2rem;
-    padding: 2rem;
-    display: grid;
+    padding: 1.5rem;
+    display: flex;
+    justify-content: space-around;
 `;
 
 export default Headr;
