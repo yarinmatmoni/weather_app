@@ -7,14 +7,14 @@ function HourCard({time,temp,feel,chanceOfRain,searchResult}) {
         <StyleCard>
             <div>
                 <h4>{time.split(" ")[1]}</h4>
-                <h5>{`Current: ${temp} C`}</h5>
+                <h5>{`Temperature: ${temp} C`}</h5>
                 <h5>{`Feels Like: ${feel} C`}</h5>
                 <h5>{`Chance Of Rain: ${chanceOfRain}%`}</h5>
             </div>
             <div className="icon">
-                {searchResult && (
+                {/* {searchResult && (
                 <img src={searchResult.forecast.forecastday[0].hour[time.split(" ")[1].split(":")[0]].condition.icon} alt=""></img>
-                )}
+                )} */}
             </div>
         </StyleCard>
     )

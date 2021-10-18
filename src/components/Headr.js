@@ -29,6 +29,18 @@ function Headr() {
     
     const {forecast}  = searchResult;
 
+    const CardsListInfo = () => {
+        let array = [];
+        array = forecast.forecastday[0].hour.filter((h)=> h.time.split(" ")[1].split(":")[0] > searchResult.current.last_updated.split(" ")[1].split(":")[0]);
+        if(array.length < 5){
+            const num = 5 - array.length;
+            for(let i=0;i<num;i++ ){
+                array.push( forecast.forecastday[1].hour[i]);
+            }
+        }
+        return array.slice(0,5).map((h)=> <HourCard key={h.time} searchResult={searchResult} time={h.time} temp={h.temp_c} feel={h.feelslike_c} chanceOfRain={h.chance_of_rain}/>)
+    };
+
     return (
         <StyleHeader>
             <input value={input} onChange={inputHandler} type="text"></input>
@@ -46,8 +58,7 @@ function Headr() {
             <Card searchResult={searchResult} locationName={locationName}/>
             <CardList>
                 {(forecast && locationName) && (
-                    forecast.forecastday[0].hour.filter((h)=> h.time.split(" ")[1].split(":")[0] > searchResult.current.last_updated.split(" ")[1].split(":")[0])
-                    .slice(0,5).map((h)=> <HourCard key={h.time} searchResult={searchResult} time={h.time} temp={h.temp_c} feel={h.feelslike_c} chanceOfRain={h.chance_of_rain}/>)
+                    CardsListInfo()
                 )}
             </CardList>
         </StyleHeader>

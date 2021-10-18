@@ -19,8 +19,8 @@ function Card({searchResult,locationName}) {
                         <Info>
                             <h3 className="title">Wind:</h3>
                             <h3 className="answer">{`${searchResult.current.wind_kph} KPH`}</h3>
-                            <h3 className="title">UV:</h3>
-                            <h3 className="answer">{searchResult.current.uv}</h3>
+                            <h3 className="title">Conditions:</h3>
+                            <h3 className="answer">{searchResult.current.condition.text}</h3>
                         </Info>    
                         <Info>
                             <img src={searchResult.current.condition.icon} alt={searchResult.current.condition.text}></img>

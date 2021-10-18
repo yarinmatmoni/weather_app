@@ -1,6 +1,6 @@
 
 const baseUrl = "http://api.weatherapi.com/v1";
-const numDays = 1;
+const numDays = 2;
 
 //Key and KeyURL
 const key = process.env.REACT_APP_WEATHER_API;
