@@ -12,7 +12,6 @@ function Headr() {
     const [input,setInput] = useState("");
     const [locationName,setLocationName] = useState(null);
     const [searchResult,setSearchResult] = useState("");
-    const [hourForeCast,setHourForeCast] = useState([]);
 
     const inputHandler = (e) => {
         setInput(e.target.value);
@@ -45,10 +44,12 @@ function Headr() {
                 ): ""}
             </LocalTime>
             <Card searchResult={searchResult} locationName={locationName}/>
-            {(forecast && locationName) && (
-                forecast.forecastday[0].hour.filter((h)=> h.time.split(" ")[1].split(":")[0] > searchResult.current.last_updated.split(" ")[1].split(":")[0])
-                .map((h)=> <HourCard key={h.time} time={h.time} temp={h.temp_c} feel={h.feelslike_c} chanceOfRain={h.chance_of_rain}/>)
-            )}
+            <CardList>
+                {(forecast && locationName) && (
+                    forecast.forecastday[0].hour.filter((h)=> h.time.split(" ")[1].split(":")[0] > searchResult.current.last_updated.split(" ")[1].split(":")[0])
+                    .map((h)=> <HourCard key={h.time} time={h.time} temp={h.temp_c} feel={h.feelslike_c} chanceOfRain={h.chance_of_rain}/>)
+                )}
+            </CardList>
         </StyleHeader>
     )
 };
@@ -94,6 +95,15 @@ const LocalTime = styled.div`
         background: #f6e4cb;
         margin-inline: 0.3rem;
     }
+`;
+
+const CardList = styled.div`
+    min-height: 25vh;
+    grid-template-columns: repeat(auto-fit,minmax(200px,1fr));
+    grid-column-gap: 4rem;
+    grid-row-gap: 2rem;
+    padding: 2rem;
+    display: grid;
 `;
 
 export default Headr;
