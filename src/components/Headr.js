@@ -47,7 +47,7 @@ function Headr() {
             <CardList>
                 {(forecast && locationName) && (
                     forecast.forecastday[0].hour.filter((h)=> h.time.split(" ")[1].split(":")[0] > searchResult.current.last_updated.split(" ")[1].split(":")[0])
-                    .slice(0,5).map((h)=> <HourCard key={h.time} time={h.time} temp={h.temp_c} feel={h.feelslike_c} chanceOfRain={h.chance_of_rain}/>)
+                    .slice(0,5).map((h)=> <HourCard key={h.time} searchResult={searchResult} time={h.time} temp={h.temp_c} feel={h.feelslike_c} chanceOfRain={h.chance_of_rain}/>)
                 )}
             </CardList>
         </StyleHeader>
