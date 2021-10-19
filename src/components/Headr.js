@@ -14,6 +14,7 @@ function Headr() {
     const [input,setInput] = useState("");
     const [locationName,setLocationName] = useState(null);
     const [searchResult,setSearchResult] = useState("");
+    const currenDay = [true,true,true,true,true];
 
     const inputHandler = (e) => {
         setInput(e.target.value);
@@ -42,11 +43,14 @@ function Headr() {
         array = forecast.forecastday[0].hour.filter((h)=> h.time.split(" ")[1].split(":")[0] > searchResult.current.last_updated.split(" ")[1].split(":")[0]);
         if(array.length < 5){
             const num = 5 - array.length;
+            let j = num-1;
             for(let i=0;i<num;i++ ){
                 array.push( forecast.forecastday[1].hour[i]);
+                currenDay[j] = false;
+                j++;
             }
         }
-        return array.slice(0,5).map((h)=> <HourCard setIsCliked={setIsCliked} isClicked={isClicked} key={h.time} array={array} searchResult={searchResult} time={h.time} temp={h.temp_c} feel={h.feelslike_c} chanceOfRain={h.chance_of_rain}/>)
+        return array.slice(0,5).map((h)=> <HourCard currenDay={currenDay} setIsCliked={setIsCliked} isClicked={isClicked} key={h.time} searchResult={searchResult} time={h.time} temp={h.temp_c} feel={h.feelslike_c} chanceOfRain={h.chance_of_rain}/>)
     };
 
     const [isClicked,setIsCliked] = useState(false);

@@ -4,17 +4,18 @@ import React from 'react';
 import styled from 'styled-components';
 import {fade} from "../animation";
 
-function HourCard({time,temp,feel,chanceOfRain,searchResult,array}) {
-
-    // const getIcons = () => {
-    //     const date = array[0].time.split(" ")[0];
-    //     for(let i=0;i<5;i++){
-    //         if(array[i].time.split(" ")[0] === date)
-    //             return <img src={searchResult.forecast.forecastday[0].hour[time.split(" ")[1].split(":")[0].split("0")[1]].condition.icon} alt=""></img>
-    //         else
-    //             return <img src={searchResult.forecast.forecastday[1].hour[time.split(" ")[1].split(":")[0].split("0")[1]].condition.icon} alt=""></img>
-    //     }
-    // };
+function HourCard({time,temp,feel,chanceOfRain,searchResult,currenDay}) {
+    
+    const getIcons = () => {
+        const icon = [];
+         currenDay.map((d)=>{
+             if(d === true)
+                 icon.push(searchResult.forecast.forecastday[0].hour.filter((h)=>h.time.split(" ")[1]=== time.split(" ")[1])[0].condition.icon);
+             else
+                 icon.push(searchResult.forecast.forecastday[1].hour.filter((h)=>h.time.split(" ")[1]=== time.split(" ")[1])[0].condition.icon);
+         });
+         return icon;
+    };
 
     return (
         <StyleCard variants={fade} initial="hidden" animate="show">
@@ -25,9 +26,9 @@ function HourCard({time,temp,feel,chanceOfRain,searchResult,array}) {
                 <motion.h5>{`Chance Of Rain: ${chanceOfRain}%`}</motion.h5>
             </motion.div>
             <motion.div className="icon">
-                {/* {searchResult && (
-                    getIcons()
-                )} */}
+                {searchResult && (
+                   <motion.img src={getIcons()[0]} alt=""/>
+                )}
             </motion.div>
         </StyleCard>
     )
