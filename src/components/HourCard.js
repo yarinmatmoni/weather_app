@@ -1,26 +1,39 @@
+import { motion } from 'framer-motion';
 import React from 'react';
 //Style
 import styled from 'styled-components';
+import {fade} from "../animation";
 
-function HourCard({time,temp,feel,chanceOfRain,searchResult}) {
+function HourCard({time,temp,feel,chanceOfRain,searchResult,array}) {
+
+    // const getIcons = () => {
+    //     const date = array[0].time.split(" ")[0];
+    //     for(let i=0;i<5;i++){
+    //         if(array[i].time.split(" ")[0] === date)
+    //             return <img src={searchResult.forecast.forecastday[0].hour[time.split(" ")[1].split(":")[0].split("0")[1]].condition.icon} alt=""></img>
+    //         else
+    //             return <img src={searchResult.forecast.forecastday[1].hour[time.split(" ")[1].split(":")[0].split("0")[1]].condition.icon} alt=""></img>
+    //     }
+    // };
+
     return (
-        <StyleCard>
-            <div>
-                <h4>{time.split(" ")[1]}</h4>
-                <h5>{`Temperature: ${temp} C`}</h5>
-                <h5>{`Feels Like: ${feel} C`}</h5>
-                <h5>{`Chance Of Rain: ${chanceOfRain}%`}</h5>
-            </div>
-            <div className="icon">
+        <StyleCard variants={fade} initial="hidden" animate="show">
+            <motion.div>
+                <motion.h4>{time.split(" ")[1]}</motion.h4>
+                <motion.h5>{`Temperature: ${temp} C`}</motion.h5>
+                <motion.h5>{`Feels Like: ${feel} C`}</motion.h5>
+                <motion.h5>{`Chance Of Rain: ${chanceOfRain}%`}</motion.h5>
+            </motion.div>
+            <motion.div className="icon">
                 {/* {searchResult && (
-                <img src={searchResult.forecast.forecastday[0].hour[time.split(" ")[1].split(":")[0]].condition.icon} alt=""></img>
+                    getIcons()
                 )} */}
-            </div>
+            </motion.div>
         </StyleCard>
     )
 };
 
-const StyleCard = styled.div`
+const StyleCard = styled(motion.div)`
     background: #fff3e5;
     border-radius: 1rem;
     padding: 0.5rem 3rem;

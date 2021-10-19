@@ -1,7 +1,9 @@
 import React,{useEffect, useState} from 'react';
 import Card from './Card';
-//Style
+//Style and Animation
 import styled from 'styled-components';
+import { motion } from 'framer-motion';
+import { fade} from '../animation';
 //Api
 import axios from "axios";
 import {currentData} from "../api";
@@ -21,6 +23,7 @@ function Headr() {
         if(input !== "")
             setLocationName(input);
         setInput("");
+        setIsCliked(true);
     };
 
     useEffect(()=>{
@@ -38,24 +41,26 @@ function Headr() {
                 array.push( forecast.forecastday[1].hour[i]);
             }
         }
-        return array.slice(0,5).map((h)=> <HourCard key={h.time} searchResult={searchResult} time={h.time} temp={h.temp_c} feel={h.feelslike_c} chanceOfRain={h.chance_of_rain}/>)
+        return array.slice(0,5).map((h)=> <HourCard setIsCliked={setIsCliked} isClicked={isClicked} key={h.time} array={array} searchResult={searchResult} time={h.time} temp={h.temp_c} feel={h.feelslike_c} chanceOfRain={h.chance_of_rain}/>)
     };
+
+    const [isClicked,setIsCliked] = useState(false);
 
     return (
         <StyleHeader>
             <input value={input} onChange={inputHandler} type="text"></input>
             <button onClick={searchWether} type="submit">Search</button>
-            <h4>Last Update:</h4>
-            <LocalTime>
+            <motion.h4  variants={fade} initial="hidden" animate={isClicked ? "show" : "hidden"}>Last Update:</motion.h4>
+            <LocalTime variants={fade} initial="hidden" animate={isClicked ? "show" : "hidden"}>
                 {(searchResult && locationName) ? (
                     <>  
-                        <h3>{searchResult.current.last_updated.split(" ")[0]}</h3>
-                        <div className="line"></div>
-                        <h3>{searchResult.current.last_updated.split(" ")[1]}</h3>
+                        <motion.h3>{searchResult.current.last_updated.split(" ")[0]}</motion.h3>
+                        <motion.div className="line"></motion.div>
+                        <motion.h3>{searchResult.current.last_updated.split(" ")[1]}</motion.h3>
                     </>
                 ): ""}
             </LocalTime>
-            <Card searchResult={searchResult} locationName={locationName}/>
+            <Card variants={fade} initial="hidden" animate="show" searchResult={searchResult} locationName={locationName}/>
             <CardList>
                 {(forecast && locationName) && (
                     CardsListInfo()
@@ -65,7 +70,7 @@ function Headr() {
     )
 };
 
-const StyleHeader = styled.div`
+const StyleHeader = styled(motion.div)`
     text-align: center;
     input{
         width: 20%;
@@ -96,7 +101,7 @@ const StyleHeader = styled.div`
     }
 `;
 
-const LocalTime = styled.div`
+const LocalTime = styled(motion.div)`
     display: flex;
     justify-content: center;
     margin-top: 0.5rem;
@@ -108,7 +113,7 @@ const LocalTime = styled.div`
     }
 `;
 
-const CardList = styled.div`
+const CardList = styled(motion.div)`
     min-height: 25vh;
     padding: 1.5rem;
     display: flex;

@@ -1,29 +1,31 @@
 import React from 'react';
 //Style 
 import styled from 'styled-components';
+import {motion} from "framer-motion";
+import { fade } from '../animation';
 
 function Card({searchResult,locationName}) {
     return (
         <>
             {locationName ? (
-                <StyleCard>
+                <StyleCard variants={fade} initial="hidden" animate="show">
                     <NameLocation>{searchResult.location.name}</NameLocation>
-                    <h3>{`${searchResult.location.country}, ${searchResult.location.region}`}</h3>
+                    <motion.h3>{`${searchResult.location.country}, ${searchResult.location.region}`}</motion.h3>
                     <Details>
                         <Info>
-                            <h3 className="title">Current:</h3>
-                            <h3 className="answer">{`${searchResult.current.temp_c} C`}</h3>
-                            <h3 className="title">Feels Like:</h3>
-                            <h3 className="answer">{`${searchResult.current.feelslike_c} C`}</h3>
+                            <motion.h3 className="title">Current:</motion.h3>
+                            <motion.h3 className="answer">{`${searchResult.current.temp_c} C`}</motion.h3>
+                            <motion.h3 className="title">Feels Like:</motion.h3>
+                            <motion.h3 className="answer">{`${searchResult.current.feelslike_c} C`}</motion.h3>
                         </Info>
                         <Info>
-                            <h3 className="title">Wind:</h3>
-                            <h3 className="answer">{`${searchResult.current.wind_kph} KPH`}</h3>
-                            <h3 className="title">Conditions:</h3>
-                            <h3 className="answer">{searchResult.current.condition.text}</h3>
+                            <motion.h3 className="title">Wind:</motion.h3>
+                            <motion.h3 className="answer">{`${searchResult.current.wind_kph} KPH`}</motion.h3>
+                            <motion.h3 className="title">Conditions:</motion.h3>
+                            <motion.h3 className="answer">{searchResult.current.condition.text}</motion.h3>
                         </Info>    
                         <Info>
-                            <img src={searchResult.current.condition.icon} alt={searchResult.current.condition.text}></img>
+                            <motion.img src={searchResult.current.condition.icon} alt={searchResult.current.condition.text}></motion.img>
                         </Info>
                     </Details>
                 </StyleCard>
@@ -32,7 +34,7 @@ function Card({searchResult,locationName}) {
     )
 };
 
-const StyleCard = styled.div`
+const StyleCard = styled(motion.div)`
     background: #ffeacf8c;
     margin-top: 2rem;
     width: 40rem;
@@ -41,7 +43,7 @@ const StyleCard = styled.div`
     box-shadow: 0px 0px 10px rgba(0 0 0 / 25%);
 `;
 
-const NameLocation = styled.div`
+const NameLocation = styled(motion.div)`
     text-align: center;
     color: dimgray;
     font-family: 'Source Sans Pro', sans-serif;
@@ -51,7 +53,7 @@ const NameLocation = styled.div`
     font-weight: bold;
 `;
 
-const Details = styled.div`
+const Details = styled(motion.div)`
     display: flex;
     justify-content: space-around;
     align-items: center;
@@ -69,7 +71,7 @@ const Details = styled.div`
     }
 `;
 
-const Info = styled.div`
+const Info = styled(motion.div)`
     display: flex;
     flex-direction: column;
     row-gap: 0.3rem;
