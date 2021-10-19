@@ -26,6 +26,11 @@ function Headr() {
         setIsCliked(true);
     };
 
+    const enterSubmitHandler = (e) => {
+        if(e.key === "Enter")
+            searchWether();
+    };
+
     useEffect(()=>{
         axios.get(currentData(locationName)).then((data) => {setSearchResult(data.data)});
     },[locationName]);
@@ -48,7 +53,7 @@ function Headr() {
 
     return (
         <StyleHeader>
-            <input value={input} onChange={inputHandler} type="text"></input>
+            <input value={input} placeholder="Enter Location For Search..." onKeyPress={enterSubmitHandler}  onChange={inputHandler} type="text"></input>
             <button onClick={searchWether} type="submit">Search</button>
             <motion.h4  variants={fade} initial="hidden" animate={isClicked ? "show" : "hidden"}>Last Update:</motion.h4>
             <LocalTime variants={fade} initial="hidden" animate={isClicked ? "show" : "hidden"}>
@@ -83,6 +88,14 @@ const StyleHeader = styled(motion.div)`
         font-family: 'Source Sans Pro', sans-serif;
         font-weight: 600;
     }
+
+    input::placeholder {
+        color: #c6c3c3;
+        font-family: 'Source Sans Pro', sans-serif;
+        font-weight: 600;
+        font-size: 1rem;
+    }
+
     button{
         font-size: 1.2rem;
         padding: 0.5rem;
