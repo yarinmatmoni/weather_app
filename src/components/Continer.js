@@ -9,7 +9,7 @@ import axios from "axios";
 import {currentData} from "../api";
 import HourCard from './HourCard';
 
-function Headr() {
+function Continer() {
 
     const [input,setInput] = useState("");
     const [locationName,setLocationName] = useState(null);
@@ -137,4 +137,4 @@ const CardList = styled(motion.div)`
     justify-content: space-around;
 `;
 
-export default Headr;
+export default Continer;

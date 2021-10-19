@@ -17,14 +17,14 @@ export const fade = {
 export const pop = {
     hidden: {
         opacity:0,
-        scale: 0.5,
+        scale: 0.7,
     },
     show: {
         opacity: 1,
         scale: 1,
         
         transition: {
-            duration: 0.75,
+            duration: 1,
         },
     },
 };
