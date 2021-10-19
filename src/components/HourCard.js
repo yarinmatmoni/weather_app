@@ -7,14 +7,10 @@ import {fade} from "../animation";
 function HourCard({time,temp,feel,chanceOfRain,searchResult,currenDay}) {
     
     const getIcons = () => {
-        const icon = [];
-         currenDay.map((d)=>{
-             if(d === true)
-                 icon.push(searchResult.forecast.forecastday[0].hour.filter((h)=>h.time.split(" ")[1]=== time.split(" ")[1])[0].condition.icon);
-             else
-                 icon.push(searchResult.forecast.forecastday[1].hour.filter((h)=>h.time.split(" ")[1]=== time.split(" ")[1])[0].condition.icon);
-         });
-         return icon;
+        if(currenDay[0])
+            return  searchResult.forecast.forecastday[0].hour.filter((h)=>h.time.split(" ")[1]=== time.split(" ")[1])[0].condition.icon;
+        else
+            return  searchResult.forecast.forecastday[1].hour.filter((h)=>h.time.split(" ")[1]=== time.split(" ")[1])[0].condition.icon;
     };
 
     return (
@@ -27,7 +23,7 @@ function HourCard({time,temp,feel,chanceOfRain,searchResult,currenDay}) {
             </motion.div>
             <motion.div className="icon">
                 {searchResult && (
-                   <motion.img src={getIcons()[0]} alt=""/>
+                   <motion.img src={getIcons()} alt=""/>
                 )}
             </motion.div>
         </StyleCard>
