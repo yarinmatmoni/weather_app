@@ -3,7 +3,7 @@ import Card from './Card';
 //Style and Animation
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
-import { fade} from '../animation';
+import { fade } from '../animation';
 //Api
 import axios from "axios";
 import {currentData} from "../api";

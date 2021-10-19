@@ -1,8 +1,8 @@
 import { motion } from 'framer-motion';
-import React from 'react';
+import React, { useState } from 'react';
 //Style
 import styled from 'styled-components';
-import {fade} from "../animation";
+import {pop} from "../animation";
 
 function HourCard({time,temp,feel,chanceOfRain,searchResult,currenDay}) {
     
@@ -13,8 +13,10 @@ function HourCard({time,temp,feel,chanceOfRain,searchResult,currenDay}) {
             return  searchResult.forecast.forecastday[1].hour.filter((h)=>h.time.split(" ")[1]=== time.split(" ")[1])[0].condition.icon;
     };
 
+    const [loaded,setLoaded] = useState(false);
+
     return (
-        <StyleCard variants={fade} initial="hidden" animate="show">
+        <StyleCard variants={pop} initial="hidden" show={loaded ? "" : "show" }>
             <motion.div>
                 <motion.h4>{time.split(" ")[1]}</motion.h4>
                 <motion.h5>{`Temperature: ${temp} C`}</motion.h5>
