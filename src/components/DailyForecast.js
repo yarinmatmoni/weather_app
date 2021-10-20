@@ -32,6 +32,7 @@ function DailyForecast({searchResult}) {
                                 <h5>{`${day.avgtemp_c} C`} (AVG)</h5>   
                             </div>
                         </div>
+                        <div className="line"></div>
                         <div className="sunAndhumidity">
                             <div className="info">
                                 <h4><StyleImage src={sunrise} alt="lowTemp" /></h4>
@@ -46,6 +47,7 @@ function DailyForecast({searchResult}) {
                                 <h5>{day.avghumidity} (AVG)</h5>
                             </div>
                         </div>
+                        <div className="line"></div>
                         <div className="icon">
                             <img className="iconImage" src={day.condition.icon} alt=""/>
                             <h3>{day.condition.text}</h3>
@@ -104,6 +106,12 @@ const StyleDatInfo = styled.div`
         height: 7rem;
         width: 15rem;
         justify-content: space-evenly;
+    }
+
+    .line{
+        height: 20rem;
+        width: 0.3rem;
+        background-color: #696969cf;
     }
 `;
 
