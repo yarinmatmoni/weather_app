@@ -1,5 +1,7 @@
 import React,{useEffect, useState} from 'react';
 import Card from './Card';
+import HourCard from './HourCard';
+import DailyForecast from './DailyForecast';
 //Style and Animation
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
@@ -7,7 +9,6 @@ import { fade } from '../animation';
 //Api
 import axios from "axios";
 import {currentData} from "../api";
-import HourCard from './HourCard';
 
 function Continer() {
 
@@ -75,6 +76,9 @@ function Continer() {
                     CardsListInfo()
                 )}
             </CardList>
+            {locationName ? (
+                <DailyForecast searchResult={searchResult}/>
+            ):""}
         </StyleHeader>
     )
 };

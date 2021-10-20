@@ -36,7 +36,7 @@ function Card({searchResult,locationName}) {
 
 const StyleCard = styled(motion.div)`
     background: #ffeacf8c;
-    margin-top: 2rem;
+    margin-top: 0.5rem;
     width: 40rem;
     margin-inline: auto;
     border-radius: 1rem;

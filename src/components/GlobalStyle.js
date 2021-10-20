@@ -11,7 +11,7 @@ const GlobalStyle = createGlobalStyle`
         font-size: 5rem;
         font-family: 'Gluten', cursive;
         font-weight: 100;
-        padding: 3rem 0rem 2rem 0rem;
+        padding: 2.5rem 0rem 1rem 0rem;
         text-align: center;
         color: dimgray;
     }
