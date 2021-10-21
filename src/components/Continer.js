@@ -15,7 +15,6 @@ function Continer() {
     const [input,setInput] = useState("");
     const [locationName,setLocationName] = useState(null);
     const [searchResult,setSearchResult] = useState("");
-    const currenDay = [true,true,true,true,true];
 
     const inputHandler = (e) => {
         setInput(e.target.value);
@@ -38,20 +37,25 @@ function Continer() {
     },[locationName]);
     
     const {forecast}  = searchResult;
+    const result = []
 
     const CardsListInfo = () => {
-        let array = [];
-        array = forecast.forecastday[0].hour.filter((h)=> h.time.split(" ")[1].split(":")[0] > searchResult.current.last_updated.split(" ")[1].split(":")[0]);
-        if(array.length < 5){
-            const num = 5 - array.length;
-            let j = num-1;
-            for(let i=0;i<num;i++ ){
-                array.push( forecast.forecastday[1].hour[i]);
-                currenDay[j] = false;
-                j++;
-            }
+        const stateDay1 = [forecast.forecastday[0]];
+        const stateDay2 = [forecast.forecastday[1]];
+        const currentHour = searchResult.current.last_updated.split(" ")[1].split(":")[0];
+
+        stateDay1[0].hour.map((h)=> {
+            if(h.time.split(" ")[1].split(":")[0] > currentHour)
+                result.push(h);
+        });
+
+        if(result.length < 5){
+            stateDay2[0].hour.map((h)=>{
+                result.push(h);
+            });
         }
-        return array.slice(0,5).map((h)=> <HourCard currenDay={currenDay} setIsCliked={setIsCliked} isClicked={isClicked} key={h.time} searchResult={searchResult} time={h.time} temp={h.temp_c} feel={h.feelslike_c} chanceOfRain={h.chance_of_rain}/>)
+
+        return(result.slice(0,5));
     };
 
     const [isClicked,setIsCliked] = useState(false);
@@ -73,7 +77,17 @@ function Continer() {
             <Card variants={fade} initial="hidden" animate="show" searchResult={searchResult} locationName={locationName}/>
             <CardList>
                 {(forecast && locationName) && (
-                    CardsListInfo()
+                    CardsListInfo().map((card)=> <HourCard 
+                    setIsCliked={setIsCliked}
+                    isClicked={isClicked}
+                    key={card.time} 
+                    searchResult={searchResult} 
+                    time={card.time} 
+                    temp={card.temp_c} 
+                    feel={card.feelslike_c} 
+                    chanceOfRain={card.chance_of_rain}
+                    result={result}
+                    />)
                 )}
             </CardList>
             {locationName ? (

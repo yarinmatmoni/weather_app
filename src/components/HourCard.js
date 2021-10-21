@@ -4,13 +4,9 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import {pop} from "../animation";
 
-function HourCard({time,temp,feel,chanceOfRain,searchResult,currenDay}) {
-    
-    const getIcons = () => {
-        if(currenDay[0])
-            return  searchResult.forecast.forecastday[0].hour.filter((h)=>h.time.split(" ")[1]=== time.split(" ")[1])[0].condition.icon;
-        else
-            return  searchResult.forecast.forecastday[1].hour.filter((h)=>h.time.split(" ")[1]=== time.split(" ")[1])[0].condition.icon;
+function HourCard({time,temp,feel,chanceOfRain,searchResult,result}) {
+    const getIcon = () => {
+       return result.slice(0,5).filter((d)=> d.time === time)
     };
 
     const [loaded,setLoaded] = useState(false);
@@ -25,7 +21,7 @@ function HourCard({time,temp,feel,chanceOfRain,searchResult,currenDay}) {
             </motion.div>
             <motion.div className="icon">
                 {searchResult && (
-                   <motion.img src={getIcons()} alt=""/>
+                    <motion.img src={getIcon()[0].condition.icon} alt=""/>
                 )}
             </motion.div>
         </StyleCard>
