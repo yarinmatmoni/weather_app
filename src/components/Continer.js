@@ -6,6 +6,7 @@ import DailyForecast from './DailyForecast';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
 import { fade } from '../animation';
+import { useScroll } from './useScroll';
 //Api
 import axios from "axios";
 import {currentData} from "../api";

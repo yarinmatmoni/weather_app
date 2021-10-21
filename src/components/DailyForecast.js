@@ -1,6 +1,7 @@
 import React from 'react';
 //Style
 import styled from 'styled-components';
+import { motion } from 'framer-motion';
 //Images
 import highTemp from '../images/high-temperature.png';
 import lowTemp from "../images/low-temperature.png";
@@ -59,7 +60,7 @@ function DailyForecast({searchResult}) {
     )
 };
 
-const StyleDay = styled.div`
+const StyleDay = styled(motion.div)`
     min-height: 70vh;
     .cards-continer{
         display: flex;
