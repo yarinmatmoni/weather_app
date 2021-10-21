@@ -90,9 +90,9 @@ function Continer() {
                     />)
                 )}
             </CardList>
-            {locationName ? (
+            {locationName && (
                 <DailyForecast searchResult={searchResult}/>
-            ):""}
+            )}
         </StyleHeader>
     )
 };

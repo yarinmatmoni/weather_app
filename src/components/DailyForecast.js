@@ -2,123 +2,100 @@ import React from 'react';
 //Style
 import styled from 'styled-components';
 //Images
+import highTemp from '../images/high-temperature.png';
 import lowTemp from "../images/low-temperature.png";
-import highTemp from "../images/high-temperature.png";
 import avgTemp from "../images/celsius.png";
 import sunrise from "../images/sunrise.png";
 import sunset from "../images/sunset.png";
 import humidity from "../images/humidity.png";
 
 function DailyForecast({searchResult}) {
-    const day = searchResult.forecast.forecastday[0].day;
-    const asrtro = searchResult.forecast.forecastday[0].astro;
     return (
-        <StyleDailyForecast>
-            <h2>Daily Forecast</h2>
-            {searchResult && (
-                <>
-                    <StyleDatInfo>
-                        <div className="temp">
-                            <div className="info">
-                                <h4><StyleImage src={lowTemp} alt="lowTemp" /></h4>
-                                <h5>{`${day.mintemp_c} C`} (MIN)</h5>    
-                            </div>
-                            <div className="info">
-                                <h4><StyleImage src={highTemp} alt="lowTemp" /></h4>
-                                <h5>{`${day.maxtemp_c} C`} (MAX)</h5>    
-                            </div>
-                            <div className="info">
-                                <h4><StyleImage src={avgTemp} alt="lowTemp" /></h4>
-                                <h5>{`${day.avgtemp_c} C`} (AVG)</h5>   
-                            </div>
-                        </div>
-                        <div className="line"></div>
-                        <div className="sunAndhumidity">
-                            <div className="info">
-                                <h4><StyleImage src={sunrise} alt="lowTemp" /></h4>
-                                <h5>{asrtro.sunrise}</h5>
-                            </div>
-                            <div className="info">
-                                <h4><StyleImage src={sunset} alt="lowTemp" /></h4>
-                                <h5>{asrtro.sunset}</h5>
-                            </div>
-                            <div className="info">
-                                <h4><StyleImage src={humidity} alt="lowTemp" /></h4>
-                                <h5>{day.avghumidity} (AVG)</h5>
-                            </div>
-                        </div>
-                        <div className="line"></div>
-                        <div className="icon">
-                            <img className="iconImage" src={day.condition.icon} alt=""/>
-                            <h3>{day.condition.text}</h3>
-                        </div>
-                    </StyleDatInfo>
-                </>
-            )}
-        </StyleDailyForecast>
+        <StyleDay>
+            <Title>Daily Forecast</Title>
+            <div className="cards-continer">
+                <div className="row">
+                    <div className="card">
+                        <h3>Max Temperature:</h3>
+                        <h3>{`${searchResult.forecast.forecastday[0].day.maxtemp_c} C`}</h3>
+                        <img src={highTemp} alt=""/>
+                    </div>
+                    <div className="card">
+                        <h3>Minimum Temperature:</h3>
+                        <h3>{`${searchResult.forecast.forecastday[0].day.mintemp_c} C`}</h3>
+                        <img src={lowTemp} alt=""/>
+                    </div>
+                    <div className="card">
+                        <h3>Avg Temperature:</h3>
+                        <h3>{`${searchResult.forecast.forecastday[0].day.avgtemp_c} C`}</h3>
+                        <img src={avgTemp} alt=""/>
+                    </div>
+                </div>
+                <div className="row">
+                    <div className="card">
+                        <h3>Sunrise:</h3>
+                        <h3>{searchResult.forecast.forecastday[0].astro.sunrise}</h3>
+                        <img src={sunrise} alt=""/>
+                    </div>
+                    <div className="card">
+                        <h3>Sunset:</h3>
+                        <h3>{searchResult.forecast.forecastday[0].astro.sunset}</h3>
+                        <img src={sunset} alt=""/>
+                    </div>
+                    <div className="card">
+                        <h3>Humidity:</h3>
+                        <h3>{searchResult.forecast.forecastday[0].day.avghumidity}</h3>
+                        <img src={humidity} alt=""/>
+                    </div>
+                </div>
+                <div className="row">
+                    <div className="card">
+                        <h3>Max Temperature:</h3>
+                        <h3>{`${searchResult.forecast.forecastday[0].day.maxtemp_c} C`}</h3>
+                    </div>
+                    <div className="card">
+                        <h3>Minimum Temperature:</h3>
+                        <h3>{`${searchResult.forecast.forecastday[0].day.mintemp_c} C`}</h3>
+                    </div>
+                    <div className="card">
+                        <h3>Avg Temperature:</h3>
+                        <h3>{`${searchResult.forecast.forecastday[0].day.avgtemp_c} C`}</h3>
+                    </div>
+                </div>
+            </div>
+        </StyleDay>
     )
 };
 
-const StyleDailyForecast = styled.div`
-    min-height: 100vh;
-    background: #f0f8ff6e;
-    margin-top: 5rem;
-
-    h2{
-        font-size: 3rem;
-        text-align: center;
-        color: dimgray;
-        font-weight: bold;
-        padding: 5rem 0rem 1.5rem 0rem;
-        font-family: 'Source Sans Pro',sans-serif;
-        color: #696969bf;
-    }
-`;
-
-const StyleDatInfo = styled.div`
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    padding: 7rem 5rem;
-    h5{
-        font-size: 1.8rem;
-        font-family: 'Source Sans Pro',sans-serif;
-        color: #696969bf;
-        }
-    h4{
-        font-size: 1rem;
-        font-family: 'Source Sans Pro',sans-serif;
-        color: #696969bf;
-    }
-    h3{
-        color: #696969bf;
-        font-family: 'Source Sans Pro',sans-serif;
-        font-size: 2rem;
-    }
-    .iconImage{
-        height: 9rem;
-        width: 9rem;
-    }
-
-    .info{
+const StyleDay = styled.div`
+    min-height: 70vh;
+    .cards-continer{
         display: flex;
-        align-items: center;
-        height: 7rem;
-        width: 15rem;
         justify-content: space-evenly;
+        padding: 2rem 4rem;
     }
-
-    .line{
-        height: 20rem;
-        width: 0.3rem;
-        background-color: #696969cf;
+    .card{
+        background: #fff3e5;
+        padding: 0.5rem 1rem;
+        border-radius: 1rem;
+        box-shadow: 0px 0px 15px rgb(0 0 0 / 20%);
+        margin: 0.6rem 0;
+        h3{
+            padding: 0.5rem;
+            font-size: 1.3rem;
+        }
+        img{
+            height: 4rem;
+            width: 4rem;
+        }
     }
 `;
 
-const StyleImage = styled.img`
-    height: 5rem;
-    width: 5rem;
-    filter: opacity(0.5) drop-shadow(0 0 0 antiquewhite);
+const Title = styled.h2`
+    font-size: 3.5rem;
+    color: dimgray;
+    font-family: 'Source Sans Pro',sans-serif;
+    padding: 2rem 0rem 2rem 0rem;
 `;
 
 export default DailyForecast;
