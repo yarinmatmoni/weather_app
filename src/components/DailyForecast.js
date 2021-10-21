@@ -48,18 +48,10 @@ function DailyForecast({searchResult}) {
                         <img src={humidity} alt=""/>
                     </div>
                 </div>
-                <div className="row">
+                <div className="row" id="icon">
                     <div className="card">
-                        <h3>Max Temperature:</h3>
-                        <h3>{`${searchResult.forecast.forecastday[0].day.maxtemp_c} C`}</h3>
-                    </div>
-                    <div className="card">
-                        <h3>Minimum Temperature:</h3>
-                        <h3>{`${searchResult.forecast.forecastday[0].day.mintemp_c} C`}</h3>
-                    </div>
-                    <div className="card">
-                        <h3>Avg Temperature:</h3>
-                        <h3>{`${searchResult.forecast.forecastday[0].day.avgtemp_c} C`}</h3>
+                        <h3>{searchResult.forecast.forecastday[0].day.condition.text}</h3>
+                        <img src={searchResult.forecast.forecastday[0].day.condition.icon} alt=""/>
                     </div>
                 </div>
             </div>
@@ -73,6 +65,7 @@ const StyleDay = styled.div`
         display: flex;
         justify-content: space-evenly;
         padding: 2rem 4rem;
+        align-items: center;
     }
     .card{
         background: #fff3e5;
@@ -80,6 +73,8 @@ const StyleDay = styled.div`
         border-radius: 1rem;
         box-shadow: 0px 0px 15px rgb(0 0 0 / 20%);
         margin: 0.6rem 0;
+        min-width: 20rem;
+        min-height: 10rem;
         h3{
             padding: 0.5rem;
             font-size: 1.3rem;
@@ -87,6 +82,12 @@ const StyleDay = styled.div`
         img{
             height: 4rem;
             width: 4rem;
+        }
+    }
+    #icon{
+        img{
+            height: 9rem;
+            width: 9rem;
         }
     }
 `;
