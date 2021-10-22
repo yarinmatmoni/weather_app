@@ -61,6 +61,8 @@ function Continer() {
 
     const [isClicked,setIsCliked] = useState(false);
 
+    const [element,controls] = useScroll();
+
     return (
         <StyleHeader>
             <input value={input} placeholder="Enter Location For Search..." onKeyPress={enterSubmitHandler}  onChange={inputHandler} type="text"></input>
@@ -92,7 +94,9 @@ function Continer() {
                 )}
             </CardList>
             {locationName && (
-                <DailyForecast searchResult={searchResult}/>
+                <motion.div variants={fade} animate={controls} initial="hidden" ref={element}>
+                    <DailyForecast searchResult={searchResult}/>
+                </motion.div>
             )}
         </StyleHeader>
     )
