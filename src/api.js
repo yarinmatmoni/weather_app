@@ -1,4 +1,4 @@
-const baseUrl = 'https://api.weatherapi.com/v1';
+const baseUrl = 'http://api.weatherapi.com/v1';
 const numDays = 2;
 
 //Key and KeyURL
